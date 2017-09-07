@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>菜鸟教程 React 实例</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+	<script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+	<script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+  </head>
+ <body>
+    <div id="content"></div>
+
+    <script type="text/jsx">
+      var TestClickComponent = React.createClass({
+	  	HandleClick:function(event){
+			var tipE = ReactDOM.findDOMNode(this.refs.tip);
+			if(tipE.style.display ==='none'){
+				tipE.style.display = 'inline';
+			}else{
+				tipE.style.display = 'none';
+			}
+			event.stopPropagation();
+			event.preventdefault();
+		},
+        render: function () {
+          return (<div><button onClick={this.HandleClick}>隐藏&显示</button><span ref="tip">测试点击事件</span></div>);
+        }
+      });
+		
+		var TestValueComponent = React.createClass({
+			getInitialState:function(){
+				return {
+					value:""
+				}
+			},
+			HandleChange:function(event){
+				this.setState({
+					value:event.target.value
+				});
+			},
+			render: function (){
+				return (<div><input type="text" onChange={this.HandleChange} /><span>{this.state.value}</span></div>);
+			}
+		});
+		ReactDOM.render(
+		  <div>
+		  	<TestClickComponent />
+			<br /><br /><br /><br />
+			<TestValueComponent />
+		  </div>,
+		  document.getElementById('content')
+		);
+    </script>
+  </body>
+</html>
